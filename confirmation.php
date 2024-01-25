@@ -9,6 +9,7 @@ if (isset($_POST['signup'])) {
 
     $isValid = true;
 
+
     if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
         $isValid = false;
     }
