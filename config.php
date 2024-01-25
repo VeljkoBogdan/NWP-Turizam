@@ -1,5 +1,9 @@
 <?php
 
+$options = [
+    'cost' => 10
+];
+
 const PARAMS = [
     "HOST" => 'localhost',
     "USER" => 'root',
