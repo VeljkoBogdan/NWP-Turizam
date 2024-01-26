@@ -10,8 +10,8 @@
             <li><a href="#">Page 3</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Login</a></li>
-            <li><a href="#">Signup</a></li>
+            <li><a href="/login.php">Login</a></li>
+            <li><a href="/registration.php">Signup</a></li>
         </ul>
     </div>
 </nav>
