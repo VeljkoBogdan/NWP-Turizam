@@ -1,5 +1,5 @@
 "use strict";
-
+// Form validation function
 function validateForm(type) {
     let isValid = true;
 
@@ -46,6 +46,107 @@ function validateForm(type) {
         }
     }
     return isValid;
+}
+// Password recovery form validation function
+function validatePasswordRecovery() {
+    let isValid = true;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirm-password").value;
+
+    if(validatePassword(password) === false){
+        isValid = false;
+        document.getElementById('password-error').innerHTML = "The password must have 8 characters, at least one number, uppercase letter and special character!";
+    }
+    if(confirmPassword !== password){
+        isValid = false;
+        document.getElementById('password-confirmation-error').innerHTML = "Passwords don't match!";
+    }
+    return isValid;
+}
+// Email for recovery validation function
+function validatePasswordRecoveryEmail() {
+    let isValid = true;
+    let forgottenEmail = document.getElementById('forgot-password-email').value.trim();
+
+    if(validateEmail(forgottenEmail) === false){
+        isValid = false;
+    }
+    alert(isValid);
+    return isValid;
+}
+// Change user password validation function
+function validatePasswordChange() {
+    let isValid = true;
+    let password = document.getElementById("password").value;
+    let newPassword = document.getElementById('new-password').value;
+    let confirmPassword = document.getElementById("confirm-password").value;
+
+    if(validatePassword(password) === false || password===""){
+        isValid = false;
+        document.getElementById('password-error').innerHTML = "The password must have 8 characters, at least one number, uppercase letter and special character!";
+    }
+    if(validatePassword(newPassword) === false || newPassword===""){
+        isValid = false;
+        document.getElementById('new-password-error').innerHTML = "The password must have 8 characters, at least one number, uppercase letter and special character!";
+    }
+    if(confirmPassword !== newPassword || confirmPassword===""){
+        isValid = false;
+        document.getElementById('confirm-password-error').innerHTML = "Passwords don't match!";
+    }
+    return isValid;
+}
+
+// Login and Signup password visibility toggler
+function togglePasswordVisibilitySignUp(){
+    let passwordInput = document.getElementById('password');
+    let confirmPasswordInput = document.getElementById('confirm-password');
+    let toggleButton = document.getElementById('toggle-button');
+    let toggleButtonConfirm = document.getElementById('toggle-button-confirm');
+    // If the password is visible
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        confirmPasswordInput.type = 'text';
+        toggleButton.textContent = 'Hide';
+        toggleButtonConfirm.textContent = 'Hide';
+    } else {
+        // If the password is invisible
+        passwordInput.type = 'password';
+        confirmPasswordInput.type = 'password';
+        toggleButton.textContent = 'Show';
+        toggleButtonConfirm.textContent = 'Show';
+    }
+}
+function togglePasswordVisibilityLogin(){
+    let passwordInput = document.getElementById('password');
+    let toggleButton = document.getElementById('toggle-button');
+    // If the password is visible
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.textContent = 'Hide';
+    } else {
+        // If the password is invisible
+        passwordInput.type = 'password';
+        toggleButton.textContent = 'Show';
+    }
+}
+function togglePasswordVisibilityNew(){
+    let newPassword = document.getElementById('new-password');
+    let confirmPasswordInput = document.getElementById('confirm-password');
+    let toggleButtonNew = document.getElementById('toggle-button-new');
+    let toggleButtonConfirm = document.getElementById('toggle-button-confirm');
+    // If the password is visible
+    if (newPassword.type === 'password') {
+        newPassword.type = 'text';
+        confirmPasswordInput.type = 'text';
+        toggleButtonNew.textContent = 'Hide';
+        toggleButtonConfirm.textContent = 'Hide';
+    } else {
+        // If the password is invisible
+        newPassword.type = 'password';
+        confirmPasswordInput.type = 'password';
+        toggleButtonNew.textContent = 'Show';
+        toggleButtonConfirm.textContent = 'Show';
+    }
 }
 
 // Regex Validators

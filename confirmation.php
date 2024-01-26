@@ -92,3 +92,58 @@ if (isset($_POST['login'])) {
         </script>";
     }
 }
+if (isset($_POST['forgot-password'])) {
+    $email_username = trim($_POST['forgot-password-email']) ;
+
+    $user_exist_query = "SELECT * FROM users WHERE email = '$email_username' ";
+    $result = $pdo->query($user_exist_query);
+
+    if ($result) {
+        if ($result->rowCount() > 0) {
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            if ($row['email'] == $email_username) {
+                try {
+                    $v_cod = $row['verification_id'];
+                } catch (\Exception $e) {
+                    echo $e->getMessage();
+                }
+
+                $mailConfirmation = passwordChange($email_username, $v_cod);
+
+                if ($mailConfirmation === TRUE) {
+                    echo "<script>
+                            alert('Check your email and reset your password.');
+                                window.location.href='index.php'
+                        </script>";
+                }else{
+                    echo "<script>
+                            alert('Couldn\'t send mail! Contact an administrator!');
+                            window.location.href='index.php'
+                        </script>";
+                }
+            }
+        }
+        else{
+            echo "<script>
+                      alert('This user doesn\'t exist!');
+                      window.location.href='change-password-form.php'
+                 </script>";
+        }
+    }
+    else{
+        echo "<script>
+                alert('Couldn\'t retrieve emails!');
+                window.location.href='index.php'
+            </script>";
+    }
+}
+if (isset($_POST['request-new-password'])) {
+    $email_username = $_GET['email'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT, $options);
+
+    $update = "UPDATE users SET password='$password' WHERE email = '$email_username'";
+    $confirmation = $pdo->query($update);
+    $_SESSION['logged_in'] = true;
+    $_SESSION['email'] = $email_username;
+    header('location: index.php');
+}

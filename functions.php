@@ -78,3 +78,37 @@ function insertRegistrationIntoTable(string $name, string $surname, string $emai
 
     return $stmt->execute();
 }
+
+function passwordChange($email, $v_cod){
+
+    require ('vendor/PHPMailer/PHPMailer/src/PHPMailer.php');
+    require ('vendor/PHPMailer/PHPMailer/src/Exception.php');
+    require ('vendor/PHPMailer/PHPMailer/src/SMTP.php');
+
+    $mail = new PHPMailer(true);
+
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '01484a2ec4eabe';
+        $mail->Password = '2c38b334d9cd44';
+
+        $mail->setFrom('tourismroutestest@gmail.com', 'EmailTest');
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Forgot Password';
+        $mail->Body    = "Click the link to change your password:<br>
+            <a href='http://localhost:63342/TourismRoutes/change-password.php?email=$email&v_cod=$v_cod'>Change password</a><br><hr><br>If this is not you, ignore this email.";
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        echo "<script>
+                alert('Exception thrown');
+</script>";
+        return false;
+
+    }
+}
