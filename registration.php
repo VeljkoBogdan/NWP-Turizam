@@ -1,6 +1,7 @@
 <?php
-require_once "functions.php";
 session_start();
+require_once "functions.php";
+
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     echo '<script> alert("You are already logged in"); </script>';
     header("Location: index.php");
@@ -17,6 +18,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 
