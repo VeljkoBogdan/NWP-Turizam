@@ -65,3 +65,30 @@ if (isset($_POST['signup'])) {
         header("Location: registration.php");
     }
 }
+if (isset($_POST['login'])) {
+    $email_username = $_POST['email'];
+    $password_login = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE email = :email AND verification_status = '1'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':email', $email_username);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row && password_verify($password_login, $row['password']) && $row['verification_status']) {
+        $_SESSION['logged_in'] = true;
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['id'] = $row['id_user'];
+        // Check if admin
+        if($row['is_admin']) $_SESSION['is_admin'] = true;
+        // Check if company
+        if($row['is_company']) $_SESSION['is_company'] = true;
+        header('location: index.php');
+    } else {
+        echo "
+        <script>
+            alert('Please verify your account!');
+            window.location.href='login.php'
+        </script>";
+    }
+}
