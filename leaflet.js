@@ -14,6 +14,21 @@ function onMapClick(e) {
     markers.push(marker);
 
     updateRoutingControl();
+
+    fetch('get_cities.php')
+        .then(response => response.json())
+        .then(data => {
+            // Find the nearest city
+            var nearestCity = findNearestCity(clickLatLng, data.cities);
+
+            // Display city information in a card or alert
+            if (nearestCity) {
+                displayCityInfo(nearestCity);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching city data:', error);
+        });
 }
 
 function updateRoutingControl() {
@@ -34,7 +49,7 @@ function updateRoutingControl() {
     }
 }
 
-function onMapDoubleClick(){
+function clearMap(){
     if (routingControl) {
         map.removeControl(routingControl);
     }
@@ -45,5 +60,28 @@ function onMapDoubleClick(){
     markers = [];
 }
 
+function findNearestCity(clickedLatLng, cities) {
+    var nearestCity = null;
+    var minDistance = Infinity;
+
+    for (var i = 0; i < cities.length; i++) {
+        var cityLatLng = L.latLng(cities[i].latitude, cities[i].longitude);
+        var distance = clickedLatLng.distanceTo(cityLatLng);
+
+        if (distance < minDistance) {
+            minDistance = distance;
+            nearestCity = cities[i];
+        }
+    }
+
+    return nearestCity;
+}
+
+function displayCityInfo(city) {
+    // You can customize this part to display the city information in a card or any UI element
+    alert('Nearest City: ' + city.name);
+}
+
+
 map.on('click', onMapClick);
-map.on('contextmenu', onMapDoubleClick);
+map.on('contextmenu', clearMap);

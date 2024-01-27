@@ -19,16 +19,15 @@ session_start()
         <div class="col-sm-3 sidenav">
 
             <ul class="nav nav-pills nav-stacked">
-            </ul><br>
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for a city or place">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
+                <br>
+                <div class="input-group" id="search-container">
+                    <input type="text" class="form-control" id="search-input" placeholder="Search for a place">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" onclick="search()" type="button"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
-            </div>
+                </div>
+            </ul>
+            <br>
         </div>
 
         <div class="col-sm-9">

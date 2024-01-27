@@ -168,3 +168,9 @@ function validatePhone(phone){
 function isValidID(id) {
     return !isNaN(id) && id > 0;
 }
+
+function search() {
+    var userInput = document.getElementById('search-input').value;
+
+    alert("success");
+}
