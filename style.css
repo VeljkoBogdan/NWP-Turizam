@@ -26,10 +26,19 @@ footer {
     padding: 15px;
 }
 
-/* On small screens, set height to 'auto' for sidenav and grid */
+/* Map height */
+#map {
+    height: 620px;
+}
+
+/* On small screens for sidenav and grid */
 @media screen and (max-width: 767px) {
     .sidenav {
         height: auto;
         padding: 15px;
     }
-    .row.content {height: auto;}
+
+    .row.content {
+        height: auto;
+    }
+}

@@ -1,4 +1,7 @@
 "use strict";
+
+
+
 // Form validation function
 function validateForm(type) {
     let isValid = true;
