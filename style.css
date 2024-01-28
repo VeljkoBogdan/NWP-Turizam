@@ -28,6 +28,18 @@ a {
     min-height: 700px;
 }
 
+.center {
+    display: flex;
+}
+
+.image {
+    padding: 0px;
+    align-self: center;
+    margin-bottom: 40px;
+    min-height: 200px;
+    min-width: 300px;
+}
+
 .form {
     min-height: 400px;
 }

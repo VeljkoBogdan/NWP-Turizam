@@ -1,5 +1,11 @@
 <?php
 session_start();
+require_once "functions.php";
+
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
+    echo '<script> alert("You are already logged in"); </script>';
+    header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once "functions.php";
+require_once "snippets/ban_check.php";
+
+if(!isset($_SESSION['logged_in'])){
+    echo '<script> alert("You are not logged in, please log in to see sights"); </script>';
+    header("Location: login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +45,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] >= 0) {
         echo '<p class="city-card"> Description: '.$row['description'].'</p>';
         echo "<br>";
         echo '<p> Contact Info: '.$row['contact_info'].'</p><br>';
+        if($row['image'] != 0) {
+            echo "<div class='container-fluid center'>";
+            echo "<img class='image' src=".$row["image"].">";
+            echo "</div>";
+        }
     }
 
     echo "</div>";

@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once "functions.php";
+require_once "snippets/ban_check.php";
+
+if(!isset($_SESSION['logged_in'])){
+    echo '<script> alert("You are not logged in, please log in to see cities"); </script>';
+    header("Location: login.php");
+}
 ?>
 
 <!DOCTYPE html>

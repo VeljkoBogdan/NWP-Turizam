@@ -1,6 +1,17 @@
 <?php
 session_start();
 require_once "functions.php";
+require_once "snippets/ban_check.php";
+
+if(!isset($_SESSION['logged_in'])){
+    echo '<script> alert("You are not logged in"); </script>';
+    header("Location: login.php");
+} else {
+    if (!isset($_SESSION['is_agency']) && !$_SESSION['is_agency']){
+        echo '<script> alert("No permission"); </script>';
+        header("Location: index.php");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

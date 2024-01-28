@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "functions.php";
+require_once "snippets/ban_check.php";
 ?>
 
 <!DOCTYPE html>
