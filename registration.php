@@ -51,12 +51,16 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         </div>
                     </div>
                 </div>
+
                 <br>
                 <div class="form-group">
                     <input class="btn btn-default border" name="signup" type="submit" value="Sign up">
                 </div>
                 <br>
+                <p>Already have an account? <a href="login.php"> Login here! </a></p>
+                <br>
             </form>
+
         </div>
     </div>
 </div>

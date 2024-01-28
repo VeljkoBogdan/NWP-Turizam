@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -13,10 +13,9 @@ session_start()
 <body>
 <?php include('snippets/header.php'); ?>
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center form">
         <div class="col-md-6">
             <h1 class="text-center">Welcome back!</h1>
-
                 <form class="form-horizontal" method="post" action="confirmation.php" id="loginForm" onsubmit="return validateForm('login')">
                     <div class="form-group">
                         <label class="control-label" for="email">Your Email Address: </label>
@@ -41,9 +40,8 @@ session_start()
                     <div class="form-group">
                         <button class="btn btn-default border" name="login" type="submit">Login</button><br>
                     </div>
+                    <p>Don't have an account? <a href="registration.php"> Sign up here! </a></p>
                 </form>
-            <h3></h3>
-            <p>Don't have an account? <a href="registration.php"> Sign up here! </a></p>
         </div>
     </div>
 </div>

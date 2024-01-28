@@ -112,3 +112,24 @@ function passwordChange($email, $v_cod){
 
     }
 }
+
+function uploadImage(): string
+{
+    if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
+        $path_parts = pathinfo($_FILES['image']['name']);
+        $extension = $path_parts['extension'];
+
+        $file_name = time() . "-" . mt_rand(100, 10000) . "." . $extension;
+
+        $upload = "uploads/" . $file_name;
+
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $upload)) {
+            return $upload;
+        } else {
+            return "Error during upload!";
+        }
+    }
+    else {
+        return "Error during check!";
+    }
+}

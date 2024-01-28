@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "functions.php";
 
 if (isset($_POST['signup'])) {
@@ -144,6 +145,42 @@ if (isset($_POST['request-new-password'])) {
     $update = "UPDATE users SET password='$password' WHERE email = '$email_username'";
     $confirmation = $pdo->query($update);
     $_SESSION['logged_in'] = true;
-    $_SESSION['email'] = $email_username;
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['id'] = $row['id_user'];
+    // Check if admin
+    if($row['is_admin']) $_SESSION['is_admin'] = true;
+    // Check if company
+    if($row['is_company']) $_SESSION['is_company'] = true;
     header('location: index.php');
 }
+if (isset($_POST['add-sight'])) {
+    $id_city = trim($_POST['id_city']);
+    $id_agency = trim($_POST['id_agency']);
+    $name = htmlspecialchars(trim(strip_tags($_POST['name'])));
+    $address = htmlspecialchars(trim(strip_tags($_POST['address'])));
+    $hours = htmlspecialchars(trim(strip_tags($_POST['hours'])));
+    $fee = htmlspecialchars(trim(strip_tags($_POST['fee'])));
+    $contact_info = htmlspecialchars(trim(strip_tags($_POST['contact_info'])));
+    $status = trim(strip_tags($_POST['status']));
+    $latitude = htmlspecialchars(trim(strip_tags($_POST['latitude'])));
+    $longitude = htmlspecialchars(trim(strip_tags($_POST['longitude'])));
+    $id_category = trim($_POST['id_category']);
+    $indoors_outdoors = trim(strip_tags($_POST['indoors_outdoors']));
+    $wifi = trim(strip_tags($_POST['wifi']));
+    $description = htmlspecialchars(trim(strip_tags($_POST['description'])));
+
+    // Handle image upload
+    $image = uploadImage();
+
+    // Insert data into the sights table
+    $sql = "INSERT INTO sights (id_city, id_agency, name, address, hours, fee, image, contact_info, status, latitude, longitude, id_category, indoors_outdoors, wifi, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$id_city, $id_agency, $name, $address, $hours, $fee, $image, $contact_info, $status, $latitude, $longitude, $id_category, $indoors_outdoors, $wifi, $description]);
+
+    // Redirect to a success page or any other page after successful submission
+    header('Location: index.php');
+    exit();
+}
+

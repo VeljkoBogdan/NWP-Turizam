@@ -6,6 +6,11 @@ a {
     text-decoration: none;
     color: #000;
 }
+
+.form {
+    min-height: 400px;
+}
+
 .bg-body-tertiary {
     background-color: black;
 }
@@ -28,7 +33,44 @@ footer {
 
 /* Map height */
 #map {
-    height: 620px;
+    height: 550px;
+}
+
+.city-info {
+    min-height: 650px;
+}
+
+.description {
+    background-color: gray;
+}
+
+.city-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+}
+
+.add-sight {
+    background-color: lightblue;
+}
+
+.recommended-cities {
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+}
+
+.recommended-cities:hover {
+    padding: 10px;
+    margin: 10px;
+    background-color: #f0f0f0;
+}
+
+.recommended-cities-a:hover {
+    background-color: #f0f0f0;
+    text-decoration: none;
+    color: black;
 }
 
 /* On small screens for sidenav and grid */

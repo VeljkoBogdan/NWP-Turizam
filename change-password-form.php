@@ -16,7 +16,7 @@ session_start()
     <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-
+<?php include_once "snippets/header.php"; ?>
 <div class="col-sm-8 text-left middle">
     <div class="container col-sm-12">
         <form class="form-horizontal" method="post" id="recovery-email-form" action="confirmation.php" onsubmit="return validatePasswordRecoveryEmail()">
@@ -35,6 +35,6 @@ session_start()
         </form>
     </div>
 </div>
-
+<?php include_once "snippets/footer.php"; ?>
 </body>
 </html>

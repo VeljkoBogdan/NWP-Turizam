@@ -16,6 +16,7 @@ require_once "functions.php";
     <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
+<?php include_once "snippets/header.php"; ?>
 
 <div class="col-sm-8 text-left middle">
     <div class="container col-sm-12">
@@ -91,6 +92,6 @@ require_once "functions.php";
         ?>
     </div>
 </div>
-
+<?php include_once "snippets/footer.php"; ?>
 </body>
 </html>

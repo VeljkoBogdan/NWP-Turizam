@@ -58,6 +58,8 @@ function clearMap(){
     });
 
     markers = [];
+
+    document.getElementById('cityCardsContainer').innerHTML = '';
 }
 
 function findNearestCity(clickedLatLng, cities) {
@@ -78,8 +80,25 @@ function findNearestCity(clickedLatLng, cities) {
 }
 
 function displayCityInfo(city) {
-    // You can customize this part to display the city information in a card or any UI element
-    alert('Nearest City: ' + city.name);
+    // Create a new card element
+    var cityCard = document.createElement('a');
+    cityCard.className = 'recommended-cities-a';
+    cityCard.href = `city.php?id=${city.id_city}`;
+
+    // Update the content of the card
+    cityCard.innerHTML = `
+            <div class="recommended-cities city-card">
+                <h2>${city.name}, ${city.country}</h2>
+                <p>Population: ${city.population}</p>
+            </div>
+    `;
+
+    var container = document.getElementById('cityCardsContainer');
+    container.insertBefore(cityCard, container.firstChild);
+}
+
+function saveRoute(){
+
 }
 
 

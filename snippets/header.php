@@ -1,3 +1,4 @@
+
 <nav class="col-sm-12 navbar navbar-expand-lg navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -10,8 +11,20 @@
             <li><a href="#">Page 3</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="login.php">Login</a></li>
-            <li><a href="registration.php">Signup</a></li>
+            <?php
+            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+                echo '<li><a href="insert-sight.php">Insert Sight</a></li> ';
+                echo '<li><a href="#">'.$_SESSION['email'].'</a></li> ';
+            }
+            else {
+                echo '<li><a href="login.php">Login</a></li>
+                    <li><a href="registration.php">Signup</a></li>';
+            }
+            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+                echo '<li><a href="../logout.php">Logout</a></li> ';
+            }
+            ?>
+
         </ul>
     </div>
 </nav>
