@@ -6,6 +6,8 @@ if (isset($_GET['email']) && isset($_GET['v_cod'])) {
     $email = $_GET['email'];
     $v_cod = $_GET['v_cod'];
 
+    var_dump($email, $v_cod);
+
     $sql="SELECT * FROM users WHERE email = '$email' AND verification_id = '$v_cod'";
     $result = $pdo->query($sql);
 
@@ -40,8 +42,46 @@ if (isset($_GET['email']) && isset($_GET['v_cod'])) {
                             window.location.href='index.php'
                         </script>";
             }
+        }else {
+            $sql2="SELECT * FROM agencies WHERE email = '$email' AND verification_id = '$v_cod'";
+            $result2 = $pdo->query($sql2);
+
+            if ($result2) {
+                if ($result2->rowCount() == 1) {
+                    $row = $result2->fetch(PDO::FETCH_ASSOC);
+                    $fetch_email = $row['email'];
+
+                    if ($row['verification_status'] == 0) {
+                        $update = "UPDATE agencies SET verification_status='1' WHERE email = '$fetch_email'";
+                        $confirmation = $pdo->query($update);
+
+                        if ($confirmation) {
+                            echo "
+                        <script>
+                            alert('Verification successful');
+                            window.location.href='index.php'
+                        </script>";
+                        }
+                        else{
+                            echo "
+                        <script>
+                            alert('Query can not run');
+                            window.location.href='index.php' 
+                        </script>";
+                        }
+                    }
+                    else{
+                        echo "
+                        <script>
+                            alert('Email already registered');
+                            window.location.href='index.php'
+                        </script>";
+                    }
+                }
+            }
         }
     }
+
 }else{
     echo "
             <script>

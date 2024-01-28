@@ -28,7 +28,7 @@ require_once "functions.php";
                 </div><br>
                 <button class="btn btn-primary border" id="toggleFormBtn"> Filters </button>
                 <button class="btn btn-primary border" id="clearNav"> Clear </button>
-                <button style="display: inline-block" class="btn btn-danger border " id="saveRoute" onclick="saveRoute()"> Save Route </button>
+                <button style="display: none" class="btn btn-danger border " id="saveRoute" onclick="saveRoute()"> Save Route </button>
                 <form style="display: none;" id="searchForm" class="form-horizontal" method="GET" action="index.php">
                     <div class="form-group container-fluid">
                         <label class="control-label" for="categories">Category:</label>

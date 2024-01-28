@@ -82,15 +82,37 @@ if (isset($_POST['login'])) {
         $_SESSION['id'] = $row['id_user'];
         // Check if admin
         if($row['is_admin']) $_SESSION['is_admin'] = true;
-        // Check if company
-        if($row['is_company']) $_SESSION['is_company'] = true;
         header('location: index.php');
     } else {
-        echo "
-        <script>
-            alert('Please verify your account!');
-            window.location.href='login.php'
-        </script>";
+        $sql = "SELECT * FROM agencies WHERE email = :email AND verification_status = '1'";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':email', $email_username);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row && password_verify($password_login, $row['password']) && $row['verification_status']) {
+            if($row['is_enabled'] == false){
+                echo "
+            <script>
+                alert('Please wait until an admin enables your account!');
+                window.location.href='login.php'
+            </script>";
+            } else {
+                $_SESSION['logged_in'] = true;
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['id'] = $row['id_agency'];
+                $_SESSION['is_agency'] = true;
+                // Check if admin
+                if($row['is_admin']) $_SESSION['is_admin'] = true;
+                header('location: index.php');
+            }
+
+        } else{
+            echo "
+            <script>
+                alert('Please verify your account!');
+                window.location.href='login.php'
+            </script>";
+        }
     }
 }
 if (isset($_POST['forgot-password'])) {
@@ -155,7 +177,7 @@ if (isset($_POST['request-new-password'])) {
 }
 if (isset($_POST['add-sight'])) {
     $id_city = trim($_POST['id_city']);
-    $id_agency = trim($_POST['id_agency']);
+    $id_agency = $_SESSION['id'];
     $name = htmlspecialchars(trim(strip_tags($_POST['name'])));
     $address = htmlspecialchars(trim(strip_tags($_POST['address'])));
     $hours = htmlspecialchars(trim(strip_tags($_POST['hours'])));
@@ -183,4 +205,99 @@ if (isset($_POST['add-sight'])) {
     header('Location: index.php');
     exit();
 }
+if (isset($_POST['agency-signup'])) {
+    // Retrieve form data
+    $name = sanitizeInput($_POST["name"]);
+    $address = sanitizeInput($_POST["address"]);
+    $contact_information = sanitizeInput($_POST["contact_information"]);
+    $website = sanitizeInput($_POST["website"]);
+    $operating_hours = sanitizeInput($_POST["operating_hours"]);
+    $establishment_date = sanitizeInput($_POST["establishment_date"]);
+    $email = sanitizeInput($_POST["email"]);
+    $password = sanitizeInput($_POST["password"]);
+
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT, $options);
+
+    $isValid = true;
+
+    if (empty($name) || empty($address) || empty($email) || empty($password)) {
+        $isValid = false;
+    }
+
+    if ($isValid) {
+        $user_exist_query = "SELECT * FROM agencies WHERE email = '$email' ";
+        $result = $pdo->query($user_exist_query);
+
+        if ($result) {
+            if ($result->rowCount() > 0) {
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+
+                if ($row['email'] === $email) {
+                    echo "
+                    <script>
+                        alert('Email already taken!');
+                        window.location.href = 'index.php'
+                    </script>";
+                }
+            }
+            else {
+                $user_exist_query2 = "SELECT * FROM users WHERE email = '$email' ";
+                $result2 = $pdo->query($user_exist_query2);
+
+                if ($result2) {
+                    if ($result2->rowCount() > 0) {
+                        $row = $result2->fetch(PDO::FETCH_ASSOC);
+
+                        if ($row['email'] === $email) {
+                            echo "
+                                <script>
+                                    alert('Email already taken!');
+                                    window.location.href = 'index.php'
+                                </script>";
+                        }
+                    }else{
+                        try {
+                            $v_cod = bin2hex(random_bytes(16));
+                        } catch (\Exception $e) {
+                            echo $e->getMessage();
+                        }
+                        $sql = "INSERT INTO agencies (name, address, contact_information, website, operating_hours, establishment_date, email, password, verification_id) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        $stmt = $pdo->prepare($sql);
+
+                        $insertConfirmation = $stmt->execute([$name, $address, $contact_information, $website, $operating_hours, $establishment_date, $email, $hashed_password, $v_cod]);
+                        $mailConfirmation = sendMail($email, $v_cod);
+
+                        if ($insertConfirmation === TRUE && $mailConfirmation === TRUE) {
+                            echo "
+                            <script>
+                                alert('Register successful. Check your email and verify your account.');
+                                    window.location.href='index.php'
+                            </script>";
+                        } else {
+                            echo "
+                            <script>
+                                alert('Couldn\'t send mail! Contact an administrator!');
+                                window.location.href='index.php'
+                            </script>";
+                        }
+                    }
+                }
+            }
+        } else{
+            echo "
+            <script>
+                alert('Couldn\'t retrieve emails!');
+                window.location.href='index.php'
+            </script>";
+        }
+    } else {
+        header("Location: registration.php");
+    }
+}
+
+function sanitizeInput($value) {
+    return strip_tags(trim($value));
+}
+
 

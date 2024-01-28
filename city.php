@@ -21,8 +21,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] >= 0) {
     $query = $pdo->query('SELECT * FROM cities WHERE id_city = ' . $id);
 
     echo "<div class='container city-info'>";
+
     while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-        echo '<h1>'.$row['name'].'</h1><br>';
+        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+            if (!isset($_SESSION['is_agency']) || !$_SESSION['is_agency']) {
+                echo "<br><button style='display: inline-block' class='btn btn-danger border navbar-right' onclick='favoriteCity(" . $row["id_city"] . ")'> Favorite this city </button>";
+            }
+        }
+        echo '<h1 style="display: inline-block">'.$row['name'].'</h1><br>';
         echo '<p> Country: '.$row['country'].'</p>';
         echo '<p> Population: '.$row['population'].'</p>';
         echo '<p> Region: '.$row['region'].'</p>';
@@ -33,14 +39,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] >= 0) {
     echo "<br><h2>Sights in this city</h2>";
     if($sql->rowCount() != 0){
         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-            echo "<div class='city-card'>";
+            echo '<a class="recommended-cities-a" href="sight.php?id='.$row["id_sight"].'">';
+            echo "<div class='recommended-cities city-card'>";
             echo '<h1>'.$row['name'].'</h1><br>';
             echo '<p> Location: '.$row['address'].'</p>';
             echo '<p> Hours: '.$row['hours'].'</p>';
             echo '<p> Fee: '.$row['fee'].'</p>';
             echo '<p> Status: '.$row['status'].'</p><br>';
             echo '<p class="description"> Description: '.$row['description'].'</p><br>';
-            echo "</div>";
+            echo "</div></a>";
         }
     }
     else{
@@ -54,5 +61,20 @@ else header("Location: index.php");
 ?>
 
 <?php include('snippets/footer.php'); ?>
+<script>
+    function favoriteCity(id_city) {
+        // Make an AJAX request to favoriteCity.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "favoriteCity.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Display the response (you can customize this based on your needs)
+                alert(xhr.responseText);
+            }
+        };
+        xhr.send("id_city=" + id_city);
+    }
+</script>
 </body>
 </html>

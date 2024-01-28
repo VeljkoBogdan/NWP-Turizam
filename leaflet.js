@@ -39,6 +39,7 @@ function updateRoutingControl() {
 
     // Create a route between all markers
     if (markers.length >= 2) {
+        document.getElementById("saveRoute").style.display = "inline-block";
         var waypoints = markers.map(function (marker) {
             return L.latLng(marker.getLatLng().lat, marker.getLatLng().lng);
         });
@@ -60,6 +61,7 @@ function clearMap(){
     markers = [];
 
     document.getElementById('cityCardsContainer').innerHTML = '';
+    document.getElementById("saveRoute").style.display = "none";
 }
 
 function findNearestCity(clickedLatLng, cities) {
@@ -95,10 +97,16 @@ function displayCityInfo(city) {
 
     var container = document.getElementById('cityCardsContainer');
     container.insertBefore(cityCard, container.firstChild);
+
+
 }
 
 function saveRoute(){
+    var waypoints = markers.map(function (marker) {
+        return L.latLng(marker.getLatLng().lat, marker.getLatLng().lng);
+    });
 
+    alert(waypoints);
 }
 
 

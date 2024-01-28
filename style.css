@@ -7,6 +7,27 @@ a {
     color: #000;
 }
 
+.login {
+    background: url("images/login.jpg") no-repeat fixed right center;
+    background-size: 75% auto;
+    border-radius: 20px;
+    min-height: 600px;
+}
+
+.signup {
+    background: url("images/signup.jpg") no-repeat fixed right center;
+    background-size: 75% auto;
+    border-radius: 20px;
+    min-height: 600px;
+}
+
+.agency-signup {
+    background: url("images/agency-signup.jpg") no-repeat fixed right center;
+    background-size: 75% auto;
+    border-radius: 20px;
+    min-height: 700px;
+}
+
 .form {
     min-height: 400px;
 }

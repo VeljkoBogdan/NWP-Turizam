@@ -13,9 +13,10 @@ session_start();
 <body>
 <?php include('snippets/header.php'); ?>
 <div class="container">
-    <div class="row justify-content-center form">
-        <div class="col-md-6">
-            <h1 class="text-center">Welcome back!</h1>
+    <div class="column">
+        <div class="col-md-6 row justify-content-center form">
+            <div class="">
+                <h1 class="text-center">Welcome back!</h1>
                 <form class="form-horizontal" method="post" action="confirmation.php" id="loginForm" onsubmit="return validateForm('login')">
                     <div class="form-group">
                         <label class="control-label" for="email">Your Email Address: </label>
@@ -42,10 +43,15 @@ session_start();
                     </div>
                     <p>Don't have an account? <a href="registration.php"> Sign up here! </a></p>
                 </form>
+            </div>
+        </div>
+        <div class="col-md-1"></div> <br>
+        <div class="col-md-5 signup navbar-right">
         </div>
     </div>
+    <br>
 </div>
-<br><br><br><br><br>
+<br><br><br><br><br><br>
 <?php include('snippets/footer.php'); ?>
 </body>
 </html>
