@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2024 at 02:53 PM
+-- Generation Time: Jan 29, 2024 at 05:28 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,34 +34,41 @@ CREATE TABLE `agencies` (
   `contact_information` varchar(255) NOT NULL DEFAULT 'Not set',
   `website` varchar(255) NOT NULL DEFAULT 'Not set',
   `operating_hours` varchar(255) NOT NULL DEFAULT 'Unknown',
-  `establishment_date` varchar(255) NOT NULL DEFAULT 'Unknown'
+  `establishment_date` varchar(255) NOT NULL DEFAULT 'Unknown',
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `is_info_hidden` int(32) NOT NULL DEFAULT 0,
+  `is_banned` int(32) NOT NULL DEFAULT 0,
+  `verification_id` varchar(255) NOT NULL,
+  `verification_status` int(32) NOT NULL DEFAULT 0,
+  `is_enabled` int(32) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `agencies`
 --
 
-INSERT INTO `agencies` (`id_agency`, `name`, `address`, `contact_information`, `website`, `operating_hours`, `establishment_date`) VALUES
-(1, 'City Tours Co.', '123 Main Street, Cityville', '+123-456-7890', 'www.citytoursco.com', 'Mon-Fri: 9am-6pm', '2022-01-01'),
-(2, 'Adventure Explorers', '456 Adventure Avenue, Outdoor City', '+987-654-3210', 'www.adventureexplorers.com', 'Mon-Sun: 8am-8pm', '2021-03-15'),
-(3, 'Urban Travel Hub', '789 Downtown Plaza, Metropolis', '+456-789-0123', 'www.urbantravelhub.com', 'Tue-Sat: 10am-7pm', '2020-07-22'),
-(4, 'Nature Wanderlust', '321 Nature Lane, Green Valley', '+789-012-3456', 'www.naturewanderlust.com', 'Mon-Sun: 9am-5pm', '2019-05-10'),
-(5, 'Cultural Connections', '567 Heritage Street, Historical Town', '+234-567-8901', 'www.culturalconnections.com', 'Wed-Mon: 11am-8pm', '2020-11-30'),
-(6, 'Sky High Adventures', '890 Skyview Road, Sky City', '+345-678-9012', 'www.skyhighadventures.com', 'Thu-Sat: 12pm-10pm', '2021-09-18'),
-(7, 'Seafront Escapes', '432 Oceanfront Drive, Coastal Village', '+678-901-2345', 'www.seafrontescapes.com', 'Mon-Sun: 8am-6pm', '2018-12-05'),
-(8, 'Historical Journeys Ltd.', '654 Past Lane, Old Town', '+901-234-5678', 'www.historicaljourneys.com', 'Tue-Fri: 10am-5pm', '2019-08-14'),
-(9, 'Mountain Majesty Tours', '789 Summit Trail, Alpine City', '+345-678-9012', 'www.mountainmajesty.com', 'Mon-Sat: 9am-7pm', '2020-02-28'),
-(10, 'City Lights Expeditions', '876 Downtown Boulevard, Nightfall City', '+567-890-1234', 'www.citylightsexpeditions.com', 'Wed-Sun: 7pm-2am', '2021-06-09'),
-(11, 'Safari Adventures Ltd.', '210 Safari Park Road, Wild Reserve', '+123-456-7890', 'www.safariadventures.com', 'Mon-Sun: 8am-6pm', '2018-10-03'),
-(12, 'Snowy Peaks Tours', '543 Alpine Avenue, Snowville', '+789-012-3456', 'www.snowypeakstours.com', 'Fri-Sun: 10am-4pm', '2019-04-21'),
-(13, 'Sunset Cruises Co.', '876 Pier Drive, Coastal Harbor', '+234-567-8901', 'www.sunsetcruises.com', 'Tue-Sat: 5pm-10pm', '2020-04-12'),
-(14, 'City Biking Adventures', '321 Bike Lane, Cyclist City', '+901-234-5678', 'www.citybikingadventures.com', 'Mon-Sun: 8am-7pm', '2019-12-01'),
-(15, 'Historic Homes Tours', '654 Heritage Lane, Vintage Village', '+345-678-9012', 'www.historichomestours.com', 'Thu-Mon: 11am-6pm', '2021-01-25'),
-(16, 'Tropical Getaways Ltd.', '543 Palm Beach Road, Island Paradise', '+567-890-1234', 'www.tropicalgetaways.com', 'Mon-Sun: 9am-8pm', '2020-06-30'),
-(17, 'Wine Country Tours', '210 Vineyard Lane, Winery Valley', '+123-456-7890', 'www.winecountrytours.com', 'Fri-Sun: 12pm-5pm', '2018-07-17'),
-(18, 'Hidden Treasures Expeditions', '876 Secret Street, Enigma City', '+789-012-3456', 'www.hiddentreasures.com', 'Wed-Sat: 10am-6pm', '2019-10-08'),
-(19, 'Green Thumb Travels', '432 Garden Avenue, Botanical Town', '+234-567-8901', 'www.greenthumbtravels.com', 'Tue-Fri: 9am-4pm', '2020-03-07'),
-(20, 'Highland Hiking Tours', '567 Mountain Trail, Highland Village', '+901-234-5678', 'www.highlandhiking.com', 'Mon-Sat: 7am-6pm', '2021-04-14');
+INSERT INTO `agencies` (`id_agency`, `name`, `address`, `contact_information`, `website`, `operating_hours`, `establishment_date`, `email`, `password`, `is_info_hidden`, `is_banned`, `verification_id`, `verification_status`, `is_enabled`) VALUES
+(1, 'City Tours Co.', '123 Main Street, Cityville', '+123-456-7890', 'www.citytoursco.com', 'Mon-Fri: 9am-6pm', '2022-01-01', '', '', 1, 0, '', 0, 0),
+(2, 'Adventure Explorers', '456 Adventure Avenue, Outdoor City', '+987-654-3210', 'www.adventureexplorers.com', 'Mon-Sun: 8am-8pm', '2021-03-15', '', '', 1, 0, '', 0, 0),
+(3, 'Urban Travel Hub', '789 Downtown Plaza, Metropolis', '+456-789-0123', 'www.urbantravelhub.com', 'Tue-Sat: 10am-7pm', '2020-07-22', '', '', 1, 0, '', 0, 0),
+(4, 'Nature Wanderlust', '321 Nature Lane, Green Valley', '+789-012-3456', 'www.naturewanderlust.com', 'Mon-Sun: 9am-5pm', '2019-05-10', '', '', 1, 0, '', 0, 0),
+(5, 'Cultural Connections', '567 Heritage Street, Historical Town', '+234-567-8901', 'www.culturalconnections.com', 'Wed-Mon: 11am-8pm', '2020-11-30', '', '', 1, 0, '', 0, 0),
+(6, 'Sky High Adventures', '890 Skyview Road, Sky City', '+345-678-9012', 'www.skyhighadventures.com', 'Thu-Sat: 12pm-10pm', '2021-09-18', '', '', 1, 0, '', 0, 0),
+(7, 'Seafront Escapes', '432 Oceanfront Drive, Coastal Village', '+678-901-2345', 'www.seafrontescapes.com', 'Mon-Sun: 8am-6pm', '2018-12-05', '', '', 1, 0, '', 0, 0),
+(8, 'Historical Journeys Ltd.', '654 Past Lane, Old Town', '+901-234-5678', 'www.historicaljourneys.com', 'Tue-Fri: 10am-5pm', '2019-08-14', '', '', 1, 0, '', 0, 0),
+(9, 'Mountain Majesty Tours', '789 Summit Trail, Alpine City', '+345-678-9012', 'www.mountainmajesty.com', 'Mon-Sat: 9am-7pm', '2020-02-28', '', '', 1, 0, '', 0, 0),
+(10, 'City Lights Expeditions', '876 Downtown Boulevard, Nightfall City', '+567-890-1234', 'www.citylightsexpeditions.com', 'Wed-Sun: 7pm-2am', '2021-06-09', '', '', 1, 0, '', 0, 0),
+(11, 'Safari Adventures Ltd.', '210 Safari Park Road, Wild Reserve', '+123-456-7890', 'www.safariadventures.com', 'Mon-Sun: 8am-6pm', '2018-10-03', '', '', 1, 0, '', 0, 0),
+(12, 'Snowy Peaks Tours', '543 Alpine Avenue, Snowville', '+789-012-3456', 'www.snowypeakstours.com', 'Fri-Sun: 10am-4pm', '2019-04-21', '', '', 1, 0, '', 0, 0),
+(13, 'Sunset Cruises Co.', '876 Pier Drive, Coastal Harbor', '+234-567-8901', 'www.sunsetcruises.com', 'Tue-Sat: 5pm-10pm', '2020-04-12', '', '', 1, 0, '', 0, 0),
+(14, 'City Biking Adventures', '321 Bike Lane, Cyclist City', '+901-234-5678', 'www.citybikingadventures.com', 'Mon-Sun: 8am-7pm', '2019-12-01', '', '', 1, 0, '', 0, 0),
+(15, 'Historic Homes Tours', '654 Heritage Lane, Vintage Village', '+345-678-9012', 'www.historichomestours.com', 'Thu-Mon: 11am-6pm', '2021-01-25', '', '', 1, 0, '', 0, 0),
+(16, 'Tropical Getaways Ltd.', '543 Palm Beach Road, Island Paradise', '+567-890-1234', 'www.tropicalgetaways.com', 'Mon-Sun: 9am-8pm', '2020-06-30', '', '', 1, 0, '', 0, 0),
+(17, 'Wine Country Tours', '210 Vineyard Lane, Winery Valley', '+123-456-7890', 'www.winecountrytours.com', 'Fri-Sun: 12pm-5pm', '2018-07-17', '', '', 1, 0, '', 0, 0),
+(18, 'Hidden Treasures Expeditions', '876 Secret Street, Enigma City', '+789-012-3456', 'www.hiddentreasures.com', 'Wed-Sat: 10am-6pm', '2019-10-08', '', '', 1, 0, '', 0, 0),
+(19, 'Green Thumb Travels', '432 Garden Avenue, Botanical Town', '+234-567-8901', 'www.greenthumbtravels.com', 'Tue-Fri: 9am-4pm', '2020-03-07', '', '', 1, 0, '', 0, 0),
+(20, 'Highland Hiking Tours', '567 Mountain Trail, Highland Village', '+901-234-5678', 'www.highlandhiking.com', 'Mon-Sat: 7am-6pm', '2021-04-14', '', '', 1, 0, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -188,7 +195,54 @@ INSERT INTO `cities` (`id_city`, `name`, `country`, `population`, `region`, `tim
 (82, 'Pirot', 'Serbia', 38122, 'Europe', 'Europe/Belgrade', NULL, '43.1500', '22.5879'),
 (83, 'Bor', 'Serbia', 48150, 'Europe', 'Europe/Belgrade', NULL, '44.0719', '22.0976'),
 (84, 'Vršac', 'Serbia', 35415, 'Europe', 'Europe/Belgrade', NULL, '45.1194', '21.3019'),
-(85, 'Loznica', 'Serbia', 73579, 'Europe', 'Europe/Belgrade', NULL, '44.5346', '19.2310');
+(85, 'Loznica', 'Serbia', 73579, 'Europe', 'Europe/Belgrade', NULL, '44.5346', '19.2310'),
+(86, 'test', 'test', 300, 'test', 'test', 'Error during check!', '20', '20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `id_favorite` int(32) NOT NULL,
+  `id_user` int(32) NOT NULL,
+  `id_city` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`id_favorite`, `id_user`, `id_city`) VALUES
+(1, 4, 28),
+(2, 4, 28),
+(3, 4, 28),
+(4, 4, 28),
+(5, 4, 28),
+(6, 4, 21);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorite_sights`
+--
+
+CREATE TABLE `favorite_sights` (
+  `id_favorite` int(32) NOT NULL,
+  `id_sight` int(32) NOT NULL,
+  `id_user` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `favorite_sights`
+--
+
+INSERT INTO `favorite_sights` (`id_favorite`, `id_sight`, `id_user`) VALUES
+(1, 4, 1),
+(2, 4, 4),
+(3, 4, 7),
+(4, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -222,14 +276,17 @@ CREATE TABLE `sights` (
 --
 
 INSERT INTO `sights` (`id_sight`, `id_city`, `id_agency`, `name`, `address`, `hours`, `fee`, `image`, `contact_info`, `status`, `latitude`, `longitude`, `times_searched`, `times_clicked`, `id_category`, `indoors_outdoors`, `wifi`, `description`) VALUES
-(1, 57, 2, 'Test1', 'Test`', '8am-3pm', '0', '0', 'Test', 'open', '20', '20', 0, 0, 5, 'Outdoors', 'yes', 'Test description'),
-(2, 24, 5, 'efefe', 'fefefe', 'fefef', 'fefef', '0', 'fefef', 'open', '20', '20', 0, 0, 10, 'Outdoors', 'yes', 'fefefeef'),
-(3, 21, 1, 'f', 'f', 'f', 'f', '0', 'f', 'open', '20', '20', 0, 0, 1, 'Outdoors', 'yes', 'fefe'),
+(1, 57, 2, 'Test1', 'Test`', '8am-3pm', '0', '0', 'Test', 'open', '20', '20', 0, 2, 5, 'Outdoors', 'yes', 'Test description'),
+(2, 24, 5, 'efefe', 'fefefe', 'fefef', 'fefef', '0', 'fefef', 'open', '20', '20', 0, 1, 10, 'Outdoors', 'yes', 'fefefeef'),
+(3, 21, 1, 'f', 'f', 'f', 'f', '0', 'f', 'open', '20', '20', 0, 1, 1, 'Outdoors', 'yes', 'fefe'),
 (4, 21, 1, 'test', '1', '1', '1', '0', 'f', 'open', '20', '20', 0, 0, 1, 'Outdoors', 'yes', 'f'),
 (5, 21, 1, 'test', '1', '1', '1', '0', 'f', 'open', '20', '20', 0, 0, 1, 'Outdoors', 'yes', 'f'),
-(6, 21, 1, 'f', 'f', 'f', 'f', '0', 'f', 'open', '20', '20', 0, 0, 1, 'Outdoors', 'yes', 'htht'),
-(7, 21, 1, 'fefe', 'fefe', 'fefe', 'fef', '0', 'fefe', 'open', '20', '20', 0, 0, 1, 'Outdoors', 'yes', 'fefefef'),
-(8, 21, 1, 'f', 'f', 'f', 'f', 'uploads/1706445885-9877.png', 'f', 'open', '20', '20', 0, 0, 1, 'Outdoors', 'yes', 'fefefe');
+(6, 21, 1, 'f', 'f', 'f', 'f', '0', 'f', 'open', '20', '20', 0, 1, 1, 'Outdoors', 'yes', 'htht'),
+(7, 21, 1, 'fefe', 'fefe', 'fefe', 'fef', '0', 'fefe', 'open', '20', '20', 0, 1, 1, 'Outdoors', 'yes', 'fefefef'),
+(8, 21, 1, 'f', 'f', 'f', 'f', 'uploads/1706445885-9877.png', 'f', 'open', '20', '20', 0, 3, 1, 'Outdoors', 'yes', 'fefefe'),
+(9, 21, 1, 'test', 'Test`', 'test', 'test', 'uploads/1706451062-3371.webp', 'test', 'open', '10', '10', 0, 1, 8, 'Indoors', 'yes', 'test'),
+(10, 74, 1, 'f', 'd', 'd', 'f', 'Error during check!', 'f', 'open', '10', '10', 0, 1, 1, 'Outdoors', 'yes', 'fef'),
+(13, 21, 23, 'test', 'test', 'f', 'f', 'Error during check!', 'f', 'closed', '20', '20', 0, 4, 8, 'Outdoors', 'no', 'test');
 
 -- --------------------------------------------------------
 
@@ -256,7 +313,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`, `is_banned`, `verification_id`, `verification_status`, `id_user`, `is_admin`, `is_agency`) VALUES
 ('veljko', 'bogdan', 'veljko@mail.com', '$2y$10$EL2meKioWEeHTUVWsIuRS.NIYPI5P6AI2F.8AURGEvK9swWcBgiZO', 0, 'ac1ba21be45a66f6d610166384aee97f', '0', 1, 0, 0),
-('veljko', 'bogdan', 'action@dr.com', '$2y$10$.KsdpwMFKVt6i3s.74quiea6DrR.qmv/F5VuTWcdz3nOLEMHRj5IK', 0, 'ef991034273e966b9e22263cef3bc772', '1', 4, 0, 0);
+('veljko', 'bogdan', 'action@dr.com', '$2y$10$JOUJmj60Ti7WnUd3oJh9COuDocoym7DGmZNCYQnH5cqJ1a3vYQveO', 0, '440a93563fcdbe3e5f221e38fae7fd62', '1', 5, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -281,6 +338,18 @@ ALTER TABLE `cities`
   ADD PRIMARY KEY (`id_city`);
 
 --
+-- Indexes for table `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`id_favorite`);
+
+--
+-- Indexes for table `favorite_sights`
+--
+ALTER TABLE `favorite_sights`
+  ADD PRIMARY KEY (`id_favorite`);
+
+--
 -- Indexes for table `sights`
 --
 ALTER TABLE `sights`
@@ -300,7 +369,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `agencies`
 --
 ALTER TABLE `agencies`
-  MODIFY `id_agency` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_agency` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -312,19 +381,31 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id_city` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id_city` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+
+--
+-- AUTO_INCREMENT for table `favorites`
+--
+ALTER TABLE `favorites`
+  MODIFY `id_favorite` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `favorite_sights`
+--
+ALTER TABLE `favorite_sights`
+  MODIFY `id_favorite` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sights`
 --
 ALTER TABLE `sights`
-  MODIFY `id_sight` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_sight` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
