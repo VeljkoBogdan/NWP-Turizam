@@ -81,7 +81,10 @@ if (isset($_POST['login'])) {
         $_SESSION['email'] = $row['email'];
         $_SESSION['id'] = $row['id_user'];
         // Check if admin
-        if($row['is_admin']) $_SESSION['is_admin'] = true;
+        if($row['is_admin']) {
+            $_SESSION['is_admin'] = true;
+            $_SESSION['is_agency'] = true;
+        }
         header('location: index.php');
     } else {
         $sql = "SELECT * FROM agencies WHERE email = :email AND verification_status = '1'";
@@ -102,7 +105,10 @@ if (isset($_POST['login'])) {
                 $_SESSION['id'] = $row['id_agency'];
                 $_SESSION['is_agency'] = true;
                 // Check if admin
-                if($row['is_admin']) $_SESSION['is_admin'] = true;
+                if($row['is_admin']) {
+                    $_SESSION['is_admin'] = true;
+                    $_SESSION['is_agency'] = true;
+                }
                 header('location: index.php');
             }
 
@@ -294,6 +300,145 @@ if (isset($_POST['agency-signup'])) {
     } else {
         header("Location: registration.php");
     }
+}
+if (isset($_POST['admin-ban'])) {
+    if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: index.php");
+    }
+
+    $inputData = $_POST['inputData'];
+
+    $id = "";
+    $email = "";
+
+    if (is_numeric($inputData)) {
+        // Input is a number (ID)
+        $id = (int) $inputData;
+        $query = "SELECT * FROM users WHERE id_user = '$id'";
+    } else {
+        // Input is an email
+        $email = $inputData;
+        $query = "SELECT * FROM users WHERE email = '$email'";
+    }
+
+    $result = $pdo->query($query);
+
+    if ($result->rowCount() > 0) {
+        // User exists, toggle the value of the is_banned column
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $isBanned = $row['is_banned'];
+
+        $newBannedStatus = $isBanned ? 0 : 1;
+
+        $updateQuery = "UPDATE users SET is_banned = '$newBannedStatus' WHERE id_user = '$id' OR email = '$email'";
+        $confirm = $pdo->query($updateQuery);
+        if ($confirm) {
+            if($newBannedStatus){
+                echo '<script> 
+                        alert("User BANNED!");
+                        window.location.href="ban_user.php?success=1";
+                        </script>';
+            }
+            else
+            {
+                echo '<script> 
+                        alert("User UNBANNED!");
+                        window.location.href="ban_user.php?success=1";
+                        </script>';
+            }
+        } else {
+            echo '<script> 
+                     alert("Error updating table!");
+                     window.location.href="ban_user.php?success=0";
+                     </script>';
+        }
+    } else {
+        echo '<script> 
+                 alert("User doesn\'t exist!");
+                 window.location.href="ban_user.php?success=0";
+                 </script>';
+    }
+}
+if (isset($_POST['agency-hide'])) {
+    if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: index.php");
+    }
+
+    $inputData = $_POST['inputData'];
+
+    $id = " ";
+    $email = " ";
+
+    if (is_numeric($inputData)) {
+        // Input is a number (ID)
+        $id = (int) $inputData;
+        $query = "SELECT * FROM agencies WHERE id_agency = '$id'";
+    } else {
+        // Input is an email
+        $email = $inputData;
+        $query = "SELECT * FROM agencies WHERE email = '$email'";
+    }
+
+    $result = $pdo->query($query);
+
+    if ($result->rowCount() > 0) {
+        // User exists, toggle the value of the is_banned column
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $isBanned = $row['is_info_hidden'];
+
+        $newBannedStatus = $isBanned ? 0 : 1;
+
+        $updateQuery = "UPDATE agencies SET is_info_hidden = '$newBannedStatus' WHERE id_agency = '$id' OR email = '$email'";
+        $confirm = $pdo->query($updateQuery);
+        if ($confirm) {
+            if($newBannedStatus){
+                echo '<script> 
+                        alert("Agency hidden!");
+                        window.location.href="ban_user.php?success=1";
+                        </script>';
+            }
+            else
+            {
+                echo '<script> 
+                        alert("Agency unhidden!");
+                        window.location.href="ban_user.php?success=1";
+                        </script>';
+            }
+        } else {
+            echo '<script> 
+                     alert("Error updating table!");
+                     window.location.href="ban_user.php?success=0";
+                     </script>';
+        }
+    } else {
+        echo '<script> 
+                 alert("Agency doesn\'t exist!");
+                 window.location.href="ban_user.php?success=0";
+                 </script>';
+    }
+}
+if (isset($_POST['add-city'])) {
+    $name = htmlspecialchars(trim(strip_tags($_POST['name'])));
+    $country = htmlspecialchars(trim(strip_tags($_POST['country'])));
+    $population = trim($_POST['population']);
+    $region = htmlspecialchars(trim(strip_tags($_POST['region'])));
+    $timezone = htmlspecialchars(trim(strip_tags($_POST['timezone'])));
+    $latitude = htmlspecialchars(trim(strip_tags($_POST['latitude'])));
+    $longitude = htmlspecialchars(trim(strip_tags($_POST['longitude'])));
+
+    // Handle image upload
+    $image = uploadImage(); // You need to implement this function
+
+    // Insert data into the cities table
+    $sql = "INSERT INTO cities (name, country, population, region, timezone, image, latitude, longitude)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$name, $country, $population, $region, $timezone, $image, $latitude, $longitude]);
+
+    // Redirect to a success page or any other page after successful submission
+    header('Location: index.php');
+    exit();
 }
 
 function sanitizeInput($value) {

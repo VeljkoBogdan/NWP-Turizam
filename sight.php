@@ -24,6 +24,9 @@ if(!isset($_SESSION['logged_in'])){
 
 if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] >= 0) {
     $id = $_GET['id'];
+    $sql = 'UPDATE sights SET times_clicked = times_clicked + 1 WHERE id_sight = ' . $id;
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
     $query = $pdo->query('SELECT * FROM sights WHERE id_sight = ' . $id);
 
     echo "<div class='container city-info'>";

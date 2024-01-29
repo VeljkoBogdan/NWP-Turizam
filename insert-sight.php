@@ -7,7 +7,7 @@ if(!isset($_SESSION['logged_in'])){
     echo '<script> alert("You are not logged in"); </script>';
     header("Location: login.php");
 } else {
-    if (!isset($_SESSION['is_agency']) && !$_SESSION['is_agency']){
+    if (!isset($_SESSION['is_agency']) && !$_SESSION['is_agency']) {
         echo '<script> alert("No permission"); </script>';
         header("Location: index.php");
     }

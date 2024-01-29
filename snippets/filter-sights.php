@@ -1,9 +1,13 @@
 <?php
 if (isset($_GET['search'])) {
+    $search = trim(strip_tags($_GET['search-input']));
     $category = null;
     $location = null;
     $fee = null;
     $any = false;
+    if($search == "" || $search == "Search for a place"){
+        $search = null;
+    }
     if(isset($_GET['categories']) && $_GET['categories'] != "") {
         $category = $_GET['categories'];
         $any = true;
@@ -24,7 +28,8 @@ if (isset($_GET['search'])) {
     $sql = "SELECT * FROM sights" .
         ($category == null ? "" : " WHERE id_category = " . $category) .
         ($location == null ? "" : ($category == null ? " WHERE" : " AND") . " id_city = " . $location) .
-        ($fee == null ? "" : ($category == null && $location == null ? " WHERE" : " AND") . " fee " . $fee);
+        ($fee == null ? "" : ($category == null && $location == null ? " WHERE" : " AND") . " fee " . $fee) .
+        ($search == null ? "" : ($category == null && $location == null && $fee == null ? " WHERE" : " AND") . " name LIKE '%" . $search . "%'");
 
     $query = $pdo->query($sql);
 

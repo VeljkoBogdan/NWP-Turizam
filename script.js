@@ -98,6 +98,25 @@ function validatePasswordChange() {
     }
     return isValid;
 }
+function validateAdminForm() {
+    var inputData = document.getElementById('inputData').value;
+
+    if (isNaN(inputData)) {
+        // Input is an email
+        if (!validateEmail(inputData)) {
+            alert('Invalid email address.');
+            return false;
+        }
+    }
+    else {
+        // Input is a number (ID)
+        if (!isValidID(inputData)) {
+            alert('Invalid ID.');
+            return false;
+        }
+    }
+    return true;
+}
 
 // Login and Signup password visibility toggler
 function togglePasswordVisibilitySignUp(){

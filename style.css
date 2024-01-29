@@ -21,6 +21,10 @@ a {
     min-height: 600px;
 }
 
+.text-reset, .text-reset:hover {
+    color: white;
+}
+
 .agency-signup {
     background: url("images/agency-signup.jpg") no-repeat fixed right center;
     background-size: 75% auto;

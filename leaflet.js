@@ -39,7 +39,7 @@ function updateRoutingControl() {
 
     // Create a route between all markers
     if (markers.length >= 2) {
-        document.getElementById("saveRoute").style.display = "inline-block";
+        document.getElementById("saveRoute").style.display = "none";
         var waypoints = markers.map(function (marker) {
             return L.latLng(marker.getLatLng().lat, marker.getLatLng().lng);
         });

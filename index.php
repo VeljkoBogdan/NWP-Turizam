@@ -18,19 +18,16 @@ require_once "snippets/ban_check.php";
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav">
-
+            <h4>Search for a place, or select it on the map!</h4>
             <ul class="nav nav-pills nav-stacked">
-                <br>
-                <div class="input-group" id="search-container">
-                    <input type="text" class="form-control" id="search-input" placeholder="Search for a place">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" onclick="search()" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-                </div><br>
                 <button class="btn btn-primary border" id="toggleFormBtn"> Filters </button>
                 <button class="btn btn-primary border" id="clearNav"> Clear </button>
                 <button style="display: none" class="btn btn-danger border " id="saveRoute" onclick="saveRoute()"> Save Route </button>
                 <form style="display: none;" id="searchForm" class="form-horizontal" method="GET" action="index.php">
+                    <br>
+                    <div class="form-group container-fluid" id="search-container">
+                        <input type="text" class="form-control" id="search-input" name="search-input" placeholder="Search for a place">
+                    </div>
                     <div class="form-group container-fluid">
                         <label class="control-label" for="categories">Category:</label>
                         <?php

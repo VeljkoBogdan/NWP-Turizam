@@ -41,68 +41,40 @@
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Content -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>Company name
+                        <i class="fas fa-gem me-3"></i>SightSeek
                     </h6>
                     <p>
-                        Here you can use rows and columns to organize your footer content. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit.
+                        We are a dedicated team providing you with the best sights.
                     </p>
                 </div>
                 <!-- Grid column -->
 
                 <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <div class="col-md-5 col-lg-4 col-xl-4 mx-auto mb-8">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Products
+                        Socials
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Angular</a>
+                        <a href="https://www.instagram.com/_v.bogdan/" class="text-reset">Instagram</a>
                     </p>
-                    <p>
-                        <a href="#!" class="text-reset">React</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Vue</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Laravel</a>
-                    </p>
+
                 </div>
                 <!-- Grid column -->
 
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Useful links
-                    </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Pricing</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Settings</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Orders</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Help</a>
-                    </p>
-                </div>
                 <!-- Grid column -->
 
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                    <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                    <p><i class="fas fa-home me-3"></i> Marka Oreškoviċa 16
+                        24111 Subotica, Srbija</p>
                     <p>
                         <i class="fas fa-envelope me-3"></i>
-                        info@example.com
+                        vtsveljkobogdan@gmail.com
                     </p>
-                    <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                    <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                    <p><i class="fas fa-phone me-3"></i> +381 065 421 7454</p>
                 </div>
                 <!-- Grid column -->
             </div>
@@ -113,8 +85,8 @@
 
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2021 Copyright:
-        <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        © 2024 Copyright:
+        <a class="text-reset fw-bold" href="https://www.vts.su.ac.rs./">VTS</a>
     </div>
     <!-- Copyright -->
 </footer>
